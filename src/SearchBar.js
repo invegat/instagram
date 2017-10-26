@@ -19,25 +19,26 @@ export default class Searchbar extends Component {
       //  }));
       return names;
     }, []);
-    console.log('names:', names)
+    // console.log('names:', names)
     this.setState({
       names
     });
   }
   matches = () => {
+    if (!this.state.searchText.length) {
+        return []
+    }
     let re = new RegExp(this.state.searchText);
     let matching = this.state.names.filter(name => {
       return name.search(re) >= 0;
     });
-    return (
-        matching.map(name => {
-          return (
-            <li key={name} onClick={() => this.setUserName(name)}>
-              {name}
-            </li>
-          );
-        })
-    );
+    return matching.map(name => {
+      return (
+        <li key={name} onClick={() => this.setUserName(name)}>
+          {name}
+        </li>
+      );
+    });
   };
 
   handleNewTextInput = event => {
@@ -53,7 +54,7 @@ export default class Searchbar extends Component {
           id="seach"
           size="20"
         />
- 
+        {this.matches()}
       </div>
     );
   }
