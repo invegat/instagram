@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import postData from './application-data';
 import './index.css';
 
 export default class Searchbar extends Component {
@@ -7,12 +6,13 @@ export default class Searchbar extends Component {
     super(props);
     this.state = {
       names: [],
-      searchText: ''
+      searchText: '',
+      postData: props.postData
     };
     this.setUserName = props.setUserName;
   }
   componentDidMount() {
-    const names = postData.reduce((names, o) => {
+    const names = this.state.postData.reduce((names, o) => {
       names.push(o.username);
       //   names.concat(names.comments.map(comment => {
       //       return comment.username

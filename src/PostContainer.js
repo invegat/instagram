@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CommentSection from './CommentSection';
 import './index.css';
-import postData from './application-data';
+import postData from './DPostContainer';
 export default class PostContainer extends Component {
   constructor(props) {
     super(props);

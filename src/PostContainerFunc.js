@@ -1,16 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CommentSection from './CommentSection';
 import './index.css';
-import postData from './application-data';
 const PostContainer = props => {
-  // console.log('PostContainer username:', this.state.username);
-  let user = postData.filter(post => {
+  if (props.username === 'x' || props.postData === undefined || props.postData.length === 0) {
+    return (
+      <div>
+      </div>
+    )
+  }
+  console.log('PostContainer props:', props);
+  let user = props.postData.filter(post => {
     return post.username === props.username;
   })[0];
   // console.log('PostContainer user comments:', user.comments);
 
-  let comments = user.comments;
-  let thumbnailUrl = user.thumbnailUrl;
+  //let comments = user.comments;
+  //let thumbnailUrl = user.thumbnailUrl;
   let imageUrl = user.imageUrl;
   let likes = user.likes;
   let timestamp = user.timestamp;
@@ -27,7 +32,7 @@ const PostContainer = props => {
 
       <img id="comment-image" src={imageUrl} alt="v5" />
 
-      <CommentSection username={props.username} />
+      <CommentSection username={props.username} addComment={props.addComment} postData={props.postData}/>
     </div>
   );
 };

@@ -1,34 +1,21 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import './index.css';
-import postData from './application-data';
+import AddComment from './AddComment'
 
 const CommentSection = (props) => {
 
-
-    let user = postData.filter(post => {
+    let user = props.postData.filter(post => {
       return post.username === props.username;
     })[0];
 
         let comments = user.comments
-let newUser=''
-let newText=''
 
-  const addComment = event => {
+  const newComment = (comment) => {
     console.log('adding Comment');
-
-    let newComment = {
-      username: newUser,
-      text:newText
-    }
-    comments.push(newComment);
-
-    this.user.comments.push(newComment)
-  };
-  const handleNewCommentUserInput = event => {
-    //this.setState({ newUser: event.target.value });
-  };
-  const handleNewTextInput = event => {
-    //this.setState({ newText: event.target.value });
+    user.comments.push(comment)
+    // comments = user.comments
+    props.addComment();
+    //Component.forceUpdate();
   };
 
     return (
@@ -45,23 +32,7 @@ let newText=''
             );
           })}
         </ul>
-        <form onSubmit={addComment}>
-          <input
-            display="inline"
-            type="text"
-            onChange={handleNewCommentUserInput}
-            placeholder="    User Name    "
-            value={newUser}
-          />
-          <input
-            display="block"
-            type="text"
-            onChange={handleNewTextInput}
-            placeholder="    Add New Comment    "
-            value={newText}
-          />
-          <input type="submit" value="Post" />
-        </form>
+        <AddComment newComment={newComment}/>
       </div>
     );
   
